@@ -1,0 +1,126 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <!-- MENU start-->
+
+      <!--      <div id="sidebar" >-->
+      <!--        <div class="group" *ngFor="let item of activities; let i = index">-->
+      <!--          <a *ngIf="item.subActivities.length"-->
+      <!--            (click)="ddToggle(i)"-->
+      <!--            class="light-blue-bg"-->
+      <!--          >{{ item.linkText }}</a>-->
+      <!--          <a *ngIf="!item.subActivities.length"-->
+      <!--            (click)="ddToggle(i)"-->
+      <!--            routerLink="{{ item.parentLink }}">{{ item.linkText }}</a>-->
+      <!--          <div class="sub-menu" [ngClass]="{ 'show-menu': item.menu }">-->
+      <!--            <ul *ngFor="let menu of result[i].subActivities">-->
+      <!--              <li>-->
+      <!--                <a href="{{ menu.link }}" target="_blank">{{ menu.childtext }}</a>-->
+      <!--              </li>-->
+      <!--            </ul>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="right-border"></div>-->
+      <!--      </div>-->
+
+
+      <!--      <div id="sidebar" >-->
+      <!--        <div *ngFor="let item of activities; let i = index">-->
+      <!--          <a *ngIf="item?.subActivities?.length"-->
+
+
+      <!--          >{{ item.linkText }}</a>-->
+      <!--          <a *ngIf="!item.subActivities.length"-->
+
+      <!--             routerLink="{{ item.parentLink }}">{{ item.linkText }}</a>-->
+      <!--&lt;!&ndash;          <div class="sub-menu" [ngClass]="{ 'show-menu': item.menu }">&ndash;&gt;-->
+      <!--&lt;!&ndash;            <ul *ngFor="let menu of result[i].subActivities">&ndash;&gt;-->
+      <!--&lt;!&ndash;              <li>&ndash;&gt;-->
+      <!--&lt;!&ndash;                <a href="{{ menu.link }}" target="_blank">{{ menu.childtext }}</a>&ndash;&gt;-->
+      <!--&lt;!&ndash;              </li>&ndash;&gt;-->
+      <!--&lt;!&ndash;            </ul>&ndash;&gt;-->
+      <!--&lt;!&ndash;          </div>&ndash;&gt;-->
+      <!--        </div>-->
+      <!--        <div class="right-border"></div>-->
+      <!--      </div>-->
+
+      <cdk-accordion class="example-accordion">
+        <cdk-accordion-item
+          *ngFor="let item of activities; let index = index;"
+          #accordionItem="cdkAccordionItem"
+          class="example-accordion-item"
+          role="button"
+          tabindex="0"
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded"
+          [attr.aria-controls]="'accordion-body-' + index">
+          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+            {{ item?.activityName }}
+            <span class="example-accordion-item-description">
+<!--        Click to {{ accordionItem.expanded ? 'close' : 'open' }}-->
+        <p *ngIf="!accordionItem.expanded">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </p>
+        <p *ngIf="accordionItem.expanded">
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        </p>
+            </span>
+          </div>
+          <a *ngFor="let submenu of item?.subActivities"
+             class=""
+             role="region"
+             [style.display]="accordionItem.expanded ? '' : 'none'"
+             [attr.id]="'accordion-body-' + index"
+             [attr.aria-labelledby]="'accordion-header-' + index" [routerLink]="['/'+submenu.activityUrl]">
+
+                   {{submenu?.activityName}}
+          </a>
+        </cdk-accordion-item>
+      </cdk-accordion>
+
+
+      <!--      <li *ngFor="let act of activities">-->
+      <!--        <button mat-menu-item [matMenuTriggerFor]="menu">{{act.activityName}}</button>-->
+      <!--        <mat-menu #menu="matMenu" class="mt-1">-->
+      <!--          <div *ngFor="let sub of act.subActivities">-->
+      <!--            <button mat-menu-item routerLink="{{ sub.activityUrl }}" routerLinkActive="router-link-active">-->
+      <!--              {{ sub.activityName }}-->
+      <!--            </button>-->
+      <!--          </div>-->
+      <!--        </mat-menu>-->
+      <!--      </li>-->
+
+
+      <!-- MENU end-->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Architecture</span>
+      <button style="float:right"
+              type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <!--    <app-dashboard-schematic></app-dashboard-schematic>-->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<!--*ngIf="isHandset$ | async"-->
