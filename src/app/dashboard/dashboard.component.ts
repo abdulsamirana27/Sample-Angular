@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Weather} from "../models/model";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  weather: Weather[]=[];
+  dummyData:Weather;
   constructor() { }
 
   ngOnInit(): void {

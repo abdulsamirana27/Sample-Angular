@@ -15,13 +15,14 @@ import {MatListModule} from '@angular/material/list';
 import {LayoutComponent} from "./layout-component/layout-component.component";
 import {LayoutModule} from "./layout-component/layout.module";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
-import { CustomerComponent } from './customer/customer.component';
+import { RadarChartComponent } from './radar-chart/radar-chart.component';
+import {NgApexchartsModule} from "ng-apexcharts";
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    CustomerComponent
+    RadarChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,9 +38,12 @@ import { CustomerComponent } from './customer/customer.component';
     MatSidenavModule,
     MatListModule,
     LayoutModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    NgApexchartsModule,
+
   ],
   providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

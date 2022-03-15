@@ -32,8 +32,6 @@ data: any= this.returnMenu();
   }
 
   constructor(private breakpointObserver: BreakpointObserver) {
-debugger
-    console.log("sam")
     for (let key in this.data.navitems) {
       if (this.data.navitems.hasOwnProperty(key)) {
         this.result.push(this.data.navitems[key]);
