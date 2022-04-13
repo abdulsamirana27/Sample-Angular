@@ -17,6 +17,7 @@ import {LayoutModule} from "./layout-component/layout.module";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
 import { RadarChartComponent } from './radar-chart/radar-chart.component';
 import {NgApexchartsModule} from "ng-apexcharts";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -24,24 +25,25 @@ import {NgApexchartsModule} from "ng-apexcharts";
     LayoutComponent,
     RadarChartComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    BrowserAnimationsModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    LayoutModule,
-    CdkAccordionModule,
-    NgApexchartsModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        BrowserAnimationsModule,
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        LayoutModule,
+        CdkAccordionModule,
+        NgApexchartsModule,
+        MatExpansionModule,
 
-  ],
+    ],
   providers: [],
 
   bootstrap: [AppComponent]

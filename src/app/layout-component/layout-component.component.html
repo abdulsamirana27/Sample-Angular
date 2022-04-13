@@ -3,82 +3,45 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar class="bg-bar text-white">Architecture</mat-toolbar>
     <mat-nav-list>
-      <!-- MENU start-->
-
-      <!--      <div id="sidebar" >-->
-      <!--        <div class="group" *ngFor="let item of activities; let i = index">-->
-      <!--          <a *ngIf="item.subActivities.length"-->
-      <!--            (click)="ddToggle(i)"-->
-      <!--            class="light-blue-bg"-->
-      <!--          >{{ item.linkText }}</a>-->
-      <!--          <a *ngIf="!item.subActivities.length"-->
-      <!--            (click)="ddToggle(i)"-->
-      <!--            routerLink="{{ item.parentLink }}">{{ item.linkText }}</a>-->
-      <!--          <div class="sub-menu" [ngClass]="{ 'show-menu': item.menu }">-->
-      <!--            <ul *ngFor="let menu of result[i].subActivities">-->
-      <!--              <li>-->
-      <!--                <a href="{{ menu.link }}" target="_blank">{{ menu.childtext }}</a>-->
-      <!--              </li>-->
-      <!--            </ul>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--        <div class="right-border"></div>-->
-      <!--      </div>-->
 
 
-      <!--      <div id="sidebar" >-->
-      <!--        <div *ngFor="let item of activities; let i = index">-->
-      <!--          <a *ngIf="item?.subActivities?.length"-->
-
-
-      <!--          >{{ item.linkText }}</a>-->
-      <!--          <a *ngIf="!item.subActivities.length"-->
-
-      <!--             routerLink="{{ item.parentLink }}">{{ item.linkText }}</a>-->
-      <!--&lt;!&ndash;          <div class="sub-menu" [ngClass]="{ 'show-menu': item.menu }">&ndash;&gt;-->
-      <!--&lt;!&ndash;            <ul *ngFor="let menu of result[i].subActivities">&ndash;&gt;-->
-      <!--&lt;!&ndash;              <li>&ndash;&gt;-->
-      <!--&lt;!&ndash;                <a href="{{ menu.link }}" target="_blank">{{ menu.childtext }}</a>&ndash;&gt;-->
-      <!--&lt;!&ndash;              </li>&ndash;&gt;-->
-      <!--&lt;!&ndash;            </ul>&ndash;&gt;-->
-      <!--&lt;!&ndash;          </div>&ndash;&gt;-->
-      <!--        </div>-->
-      <!--        <div class="right-border"></div>-->
-      <!--      </div>-->
-
-      <cdk-accordion class="example-accordion">
+      <cdk-accordion class="example-accordion px-2 border-none">
         <cdk-accordion-item
           *ngFor="let item of activities; let index = index;"
           #accordionItem="cdkAccordionItem"
-          class="example-accordion-item"
+          class="example-accordion-item border-0"
           role="button"
           tabindex="0"
           [attr.id]="'accordion-header-' + index"
           [attr.aria-expanded]="accordionItem.expanded"
           [attr.aria-controls]="'accordion-body-' + index">
-          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+          <div [routerLink]="returnUrl([item?.activityUrl])" class="example-accordion-item-header border-side p-3 bg-primary mb-2" (click)="accordionItem.toggle()" >
             {{ item?.activityName }}
-            <span class="example-accordion-item-description">
+            <span *ngIf="item?.subActivities?.length>0" class="example-accordion-item-description">
 <!--        Click to {{ accordionItem.expanded ? 'close' : 'open' }}-->
+
         <p *ngIf="!accordionItem.expanded">
-          <mat-icon>keyboard_arrow_down</mat-icon>
+          <mat-icon color="white">keyboard_arrow_down</mat-icon>
         </p>
         <p *ngIf="accordionItem.expanded">
           <mat-icon>keyboard_arrow_up</mat-icon>
         </p>
             </span>
           </div>
-          <a *ngFor="let submenu of item?.subActivities"
-             class=""
-             role="region"
-             [style.display]="accordionItem.expanded ? '' : 'none'"
-             [attr.id]="'accordion-body-' + index"
-             [attr.aria-labelledby]="'accordion-header-' + index" [routerLink]="['/'+submenu.activityUrl]">
+          <div class="drop-body" style="display: flex;flex-direction: column; gap: 5%">
 
-                   {{submenu?.activityName}}
-          </a>
+            <a  *ngFor="let submenu of item?.subActivities"
+                class=""
+                role="region"
+                [style.display]="accordionItem.expanded ? '' : 'none'"
+                [attr.id]="'accordion-body-' + index"
+                [attr.aria-labelledby]="'accordion-header-' + index" [routerLink]="[submenu.activityUrl]">
+
+              {{submenu?.activityName}}
+            </a>
+          </div>
         </cdk-accordion-item>
       </cdk-accordion>
 
@@ -107,7 +70,7 @@
         (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Architecture</span>
+
 
     </mat-toolbar>
     <!-- Add Content Here -->
